@@ -1,0 +1,728 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: #f3f6fb;
+  color: #111827;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  background:
+    radial-gradient(circle at top left, #2563eb22, transparent 30%),
+    linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+.login-left {
+  color: white;
+  padding: 80px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.login-logo {
+  width: 76px;
+  height: 76px;
+  border-radius: 24px;
+  background: #2563eb;
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+  margin-bottom: 24px;
+}
+
+.login-left h1 {
+  font-size: 56px;
+  margin: 0;
+}
+
+.login-left p {
+  font-size: 20px;
+  color: #cbd5e1;
+  max-width: 500px;
+}
+
+.login-card {
+  width: 420px;
+  align-self: center;
+  justify-self: center;
+  padding: 34px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+}
+
+.login-card h2 {
+  margin: 0 0 8px;
+  font-size: 30px;
+}
+
+.login-card p {
+  margin-bottom: 24px;
+  color: #6b7280;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+input {
+  width: 100%;
+  padding: 13px 14px;
+  margin-bottom: 18px;
+  border: 1px solid #dbe1ea;
+  border-radius: 12px;
+  background: #fbfdff;
+  outline: none;
+}
+
+input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px #2563eb18;
+}
+
+button {
+  padding: 13px 18px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 270px;
+  padding: 24px;
+  background: #0f172a;
+  color: white;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.brand {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 36px;
+}
+
+.brand-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #2563eb;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+
+.brand strong {
+  display: block;
+  font-size: 22px;
+}
+
+.brand small {
+  color: #94a3b8;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu a {
+  color: #cbd5e1;
+  text-decoration: none;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 14px;
+}
+
+.menu a:hover,
+.menu a.active {
+  background: #1e293b;
+  color: white;
+}
+
+.main-area {
+  flex: 1;
+}
+
+.navbar {
+  height: 76px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.navbar strong {
+  display: block;
+}
+
+.navbar span {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.logout-btn {
+  background: #ef4444;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+.content {
+  padding: 32px;
+}
+
+.page-header {
+  margin-bottom: 26px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.page-header p {
+  color: #6b7280;
+  margin: 6px 0 0;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: white;
+  padding: 24px;
+  border-radius: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+}
+
+.stat-card h3 {
+  margin: 0;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.stat-card p {
+  font-size: 38px;
+  font-weight: 800;
+  margin: 8px 0 0;
+}
+
+.stat-card svg {
+  font-size: 38px;
+}
+
+.stat-card.blue svg {
+  color: #2563eb;
+}
+
+.stat-card.green svg {
+  color: #16a34a;
+}
+
+.stat-card.orange svg {
+  color: #f97316;
+}
+
+.panel {
+  background: white;
+  padding: 26px;
+  border-radius: 22px;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+}
+
+.panel h2 {
+  margin-top: 0;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-header p {
+  color: #6b7280;
+  margin: 4px 0 0;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.guide-grid div {
+  padding: 18px;
+  background: #f8fafc;
+  border-radius: 16px;
+}
+
+.guide-grid p {
+  color: #6b7280;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: #f8fafc;
+  text-align: left;
+  padding: 14px;
+  color: #475569;
+}
+
+td {
+  padding: 14px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.empty {
+  text-align: center;
+  color: #6b7280;
+}
+
+.badge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #166534;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.form-panel {
+  max-width: 900px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.form-grid .full {
+  grid-column: span 2;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rfid-panel {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.rfid-card {
+  min-height: 260px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #1e293b, #2563eb);
+  color: white;
+  padding: 30px;
+}
+
+.rfid-chip {
+  width: 64px;
+  height: 48px;
+  border-radius: 10px;
+  background: #facc15;
+  margin-bottom: 26px;
+}
+
+.rfid-card p {
+  color: #dbeafe;
+}
+
+.rfid-form {
+  max-width: 460px;
+}
+
+@media (max-width: 900px) {
+  .login-page {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .login-left {
+    display: none;
+  }
+
+  .login-card {
+    width: 100%;
+  }
+
+  .sidebar {
+    width: 90px;
+    padding: 18px;
+  }
+
+  .brand span,
+  .brand div:last-child,
+  .menu a {
+    font-size: 0;
+  }
+
+  .menu a svg {
+    font-size: 20px;
+  }
+
+  .cards,
+  .guide-grid,
+  .form-grid,
+  .rfid-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid .full {
+    grid-column: span 1;
+  }
+}
+
+.member-detail-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.detail-row span {
+  color: #64748b;
+}
+
+.detail-row strong {
+  text-align: right;
+}
+
+.rfid-status {
+  padding: 26px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  border: 2px dashed #cbd5e1;
+  background: #f8fafc;
+}
+
+.rfid-status p {
+  margin: 0 0 8px;
+  color: #64748b;
+}
+
+.rfid-status strong {
+  font-size: 20px;
+}
+
+.rfid-status.connected {
+  background: #ecfdf5;
+  border-color: #22c55e;
+}
+
+.rfid-status.empty {
+  background: #fff7ed;
+  border-color: #fb923c;
+}
+
+.scan-frame {
+  margin-top: 22px;
+  padding: 22px;
+  border-radius: 20px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+}
+
+.scan-frame h3 {
+  margin-top: 0;
+}
+
+.scan-frame p {
+  color: #64748b;
+}
+
+.scan-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.secondary-btn {
+  background: #64748b;
+}
+
+.secondary-btn:hover {
+  background: #475569;
+}
+
+@media (max-width: 900px) {
+  .member-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.member-detail-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.detail-row span {
+  color: #64748b;
+}
+
+.detail-row strong {
+  text-align: right;
+}
+
+.rfid-status {
+  padding: 26px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  border: 2px dashed #cbd5e1;
+  background: #f8fafc;
+}
+
+.rfid-status p {
+  margin: 0 0 8px;
+  color: #64748b;
+}
+
+.rfid-status strong {
+  font-size: 20px;
+}
+
+.rfid-status.connected {
+  background: #ecfdf5;
+  border-color: #22c55e;
+}
+
+.rfid-status.empty {
+  background: #fff7ed;
+  border-color: #fb923c;
+}
+
+.scanner-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.scanner-modal {
+  width: 620px;
+  max-width: calc(100% - 32px);
+  background: white;
+  border-radius: 26px;
+  padding: 24px;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.35);
+}
+
+.scanner-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.scanner-header h2 {
+  margin: 0;
+}
+
+.scanner-header p {
+  margin: 6px 0 0;
+  color: #64748b;
+}
+
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #0f172a;
+  font-size: 24px;
+}
+
+.icon-btn:hover {
+  background: #e2e8f0;
+}
+
+.scanner-current {
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+.scanner-current span {
+  display: block;
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.scanner-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.scanner-tabs button {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.scanner-tabs button.active {
+  background: #2563eb;
+  color: white;
+}
+
+.scanner-box {
+  padding: 24px;
+  border-radius: 20px;
+  background: #f8fafc;
+  text-align: center;
+}
+
+.scanner-box h3 {
+  margin: 12px 0 8px;
+}
+
+.scanner-box p {
+  color: #64748b;
+}
+
+.scanner-animation {
+  font-size: 48px;
+}
+
+.coming-soon {
+  padding: 16px;
+  border-radius: 14px;
+  background: #fff7ed;
+  color: #9a3412;
+  font-weight: 700;
+}
+
+.scanner-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.secondary-btn {
+  background: #64748b;
+}
+
+.secondary-btn:hover {
+  background: #475569;
+}
+
+@media (max-width: 900px) {
+  .member-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scanner-tabs {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mobile-nfc-page {
+  min-height: 100vh;
+  background: #0f172a;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.mobile-nfc-card {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  padding: 28px;
+  border-radius: 24px;
+}
+
+.nfc-status {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.nfc-status.success {
+  background: #ecfdf5;
+  color: #166534;
+}

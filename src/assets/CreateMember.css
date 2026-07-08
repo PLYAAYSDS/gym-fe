@@ -1,0 +1,297 @@
+.member-page {
+  padding: 42px 36px;
+  background: #f4f6fb;
+  min-height: calc(100vh - 76px);
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.create-layout {
+  display: grid;
+  grid-template-columns: minmax(420px, 760px) 360px;
+  gap: 24px;
+  align-items: start;
+}
+
+.member-form-card,
+.detail-card,
+.member-profile-card,
+.helper-card {
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.member-form-card {
+  padding: 30px;
+}
+
+.form-title {
+  margin-bottom: 24px;
+}
+
+.form-title h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.form-title p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-grid input,
+.form-grid textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d9dee8;
+  border-radius: 14px;
+  padding: 15px 16px;
+  font-size: 15px;
+  outline: none;
+  background: #ffffff;
+  transition: 0.18s;
+}
+
+.form-grid textarea {
+  min-height: 108px;
+  resize: vertical;
+  grid-row: span 2;
+}
+
+.form-grid input:focus,
+.form-grid textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.primary-button,
+.secondary-button {
+  border: 0;
+  border-radius: 14px;
+  padding: 14px 22px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.primary-button {
+  margin-top: 22px;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.primary-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  background: #e8edf7;
+  color: #1f2937;
+}
+
+.helper-card {
+  padding: 28px;
+  position: sticky;
+  top: 24px;
+}
+
+.helper-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: #eef4ff;
+  font-size: 28px;
+  margin-bottom: 18px;
+}
+
+.helper-card h3 {
+  margin: 0 0 10px;
+}
+
+.helper-card p {
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.message {
+  margin-top: 14px;
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.detail-layout {
+  max-width: 980px;
+  display: grid;
+  gap: 20px;
+}
+
+.member-profile-card {
+  padding: 26px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 22px;
+  background: #2563eb;
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.member-profile-card h2 {
+  margin: 0 0 5px;
+}
+
+.member-profile-card p {
+  margin: 0;
+  color: #64748b;
+}
+
+.status-pill {
+  margin-left: auto;
+  background: #dcfce7;
+  color: #15803d;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.detail-card {
+  padding: 26px;
+}
+
+.detail-card h3 {
+  margin: 0 0 18px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.detail-item {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.detail-item span {
+  display: block;
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.detail-item strong {
+  color: #0f172a;
+}
+
+.rfid-card {
+  display: grid;
+  gap: 18px;
+}
+
+.rfid-card p {
+  margin: 0;
+  color: #64748b;
+}
+
+.rfid-box {
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.rfid-box span {
+  display: block;
+  color: #94a3b8;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.rfid-box strong {
+  font-size: 22px;
+  letter-spacing: 0.08em;
+}
+
+.button-row {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 1000px) {
+  .create-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .helper-card {
+    position: static;
+  }
+}
+
+@media (max-width: 700px) {
+  .member-page {
+    padding: 28px 18px;
+  }
+
+  .form-grid,
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    gap: 14px;
+    flex-direction: column;
+  }
+
+  .member-profile-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .status-pill {
+    margin-left: 0;
+  }
+}
