@@ -31,7 +31,7 @@ export default function CreateMemberPage() {
     const response = await api.post("/users/member", form);
 
     const userId = response.data.user.id;
-
+    localStorage.setItem('access_token', response.data.access_token);
     navigate(`/members/${userId}`);
   };
 
@@ -49,21 +49,6 @@ export default function CreateMemberPage() {
           <div>
             <label>Email</label>
             <input name="email" value={form.email} onChange={handleChange} />
-          </div>
-
-          <div>
-            <label>Password</label>
-            <input
-              name="password"
-              type="password"
-              value={form.password}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div>
-            <label>RFID UID Optional</label>
-            <input name="uid" value={form.uid} onChange={handleChange} />
           </div>
         </div>
 

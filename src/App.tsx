@@ -63,9 +63,17 @@ export default function App() {
         />
 
         <Route path="/mobile-nfc/:userId" element={<MobileNfcPage />} />
+
+        <Route
+          path="/members/:userId"
+          element={
+            <ProtectedRoute>
+              <MemberDetailPage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
 
-      
     </BrowserRouter>
   );
 }

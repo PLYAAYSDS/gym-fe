@@ -1,5 +1,10 @@
 import api from "./api";
 
+export const getMembers = async () => {
+  const response = await api.get("/users");
+  return response.data;
+};
+
 export const getMemberDetail = async (userId: number) => {
   const response = await api.get(`/users/${userId}`);
   return response.data;

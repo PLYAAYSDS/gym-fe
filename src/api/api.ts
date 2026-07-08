@@ -1,11 +1,14 @@
-import axios from "axios";
+import axios from 'axios';
 
 const api = axios.create({
   baseURL: "https://reoccupy-evade-hexagon.ngrok-free.dev",
+  headers: {
+    'ngrok-skip-browser-warning': 'true',
+  },
 });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('access_token');
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -13,5 +16,17 @@ api.interceptors.request.use((config) => {
 
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('access_token');
+      window.location.href = '/login';
+    }
+
+    return Promise.reject(error);
+  },
+);
 
 export default api;
