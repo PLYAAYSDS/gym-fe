@@ -907,3 +907,27 @@ td {
     display: none;
   }
 }
+
+.dashboard-cards {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.stat-card.purple svg {
+  color: #7c3aed;
+}
+
+.stat-card.red svg {
+  color: #dc2626;
+}
+
+@media (max-width: 1200px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+}
