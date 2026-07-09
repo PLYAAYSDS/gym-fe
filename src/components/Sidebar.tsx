@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import {
   FaDumbbell,
   FaHome,
-  FaIdCard,
   FaUserPlus,
   FaUsers,
   FaCalendarCheck,

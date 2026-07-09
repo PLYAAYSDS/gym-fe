@@ -17,8 +17,6 @@ type ScanResult = {
 export default function AttendancePage() {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [uid, setUid] = useState("");
-  const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<ScanResult | null>(null);
 
   useEffect(() => {
