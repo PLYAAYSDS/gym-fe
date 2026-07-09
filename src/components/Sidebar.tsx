@@ -34,10 +34,6 @@ export default function Sidebar() {
           <FaUserPlus /> Create Member
         </NavLink>
 
-        <NavLink to="/members/assign-rfid">
-          <FaIdCard /> Assign RFID
-        </NavLink>
-
         <NavLink to="/attendance">
             <FaCalendarCheck /> Attendance
         </NavLink>

@@ -30,6 +30,10 @@ export default function MemberDetailPage() {
   const [attendanceDates, setAttendanceDates] = useState<string[]>([]);
   const [member, setMember] = useState<MemberDetail | null>(null);
   const [scannerOpen, setScannerOpen] = useState(false);
+  const today = new Date();
+
+  const [calendarMonth, setCalendarMonth] = useState(today.getMonth() + 1);
+  const [calendarYear, setCalendarYear] = useState(today.getFullYear());
 
   const loadDetail = async () => {
     if (!userId) return;
@@ -39,16 +43,21 @@ export default function MemberDetailPage() {
   };
 
   const loadAttendance = async () => {
-    if (!userId) return;
+  if (!userId) return;
 
-    const data = await getMemberAttendanceHistory(Number(userId));
-    setAttendanceDates(data.map((item: any) => item.date));
+  const data = await getMemberAttendanceHistory(
+      Number(userId),
+      calendarMonth,
+      calendarYear,
+    );
+
+    setAttendanceDates(data.map((item: any) => item.attendanceDate));
   };
 
   useEffect(() => {
     loadDetail();
     loadAttendance();
-  }, [userId]);
+  }, [userId, calendarMonth, calendarYear]);
 
   if (!member) {
     return (
@@ -57,6 +66,12 @@ export default function MemberDetailPage() {
       </Layout>
     );
   }
+
+  const getDaysInMonth = (year: number, month: number) => {
+    return new Date(year, month, 0).getDate();
+  };
+
+  const daysInMonth = getDaysInMonth(calendarYear, calendarMonth);
 
   const submitExtendMembership = async () => {
     if (!newExpiredDate || !member) {
@@ -157,31 +172,63 @@ export default function MemberDetailPage() {
       </div>
 
       <div className="panel attendance-calendar-panel">
+      <div className="calendar-header">
         <h2>Attendance Calendar</h2>
 
-        <div className="calendar-grid">
-          {Array.from({ length: 31 }).map((_, index) => {
-            const day = index + 1;
+        <div className="calendar-controls">
+          <select
+            value={calendarMonth}
+            onChange={(e) => setCalendarMonth(Number(e.target.value))}
+          >
+            {[
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December",
+            ].map((name, index) => (
+              <option key={name} value={index + 1}>
+                {name}
+              </option>
+            ))}
+          </select>
 
-            const today = new Date();
-            const year = today.getFullYear();
-            const month = String(today.getMonth() + 1).padStart(2, "0");
-            const date = String(day).padStart(2, "0");
-
-            const fullDate = `${year}-${month}-${date}`;
-            const checkedIn = attendanceDates.includes(fullDate);
-
-            return (
-              <div
-                key={fullDate}
-                className={checkedIn ? "calendar-day checked" : "calendar-day"}
-              >
-                <span>{day}</span>
-              </div>
-            );
-          })}
+          <input
+            type="number"
+            value={calendarYear}
+            onChange={(e) => setCalendarYear(Number(e.target.value))}
+          />
         </div>
       </div>
+
+      <div className="calendar-grid">
+        {Array.from({ length: daysInMonth }).map((_, index) => {
+          const day = index + 1;
+
+          const month = String(calendarMonth).padStart(2, "0");
+          const date = String(day).padStart(2, "0");
+
+          const fullDate = `${calendarYear}-${month}-${date}`;
+          const checkedIn = attendanceDates.includes(fullDate);
+
+          return (
+            <div
+              key={fullDate}
+              className={checkedIn ? "calendar-day checked" : "calendar-day"}
+            >
+              <span>{day}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
 
       <CardScannerModal
         open={scannerOpen}

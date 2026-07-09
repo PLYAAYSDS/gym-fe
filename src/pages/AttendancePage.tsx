@@ -25,46 +25,55 @@ export default function AttendancePage() {
     inputRef.current?.focus();
   }, []);
 
-  const submitCheckIn = async (value?: string) => {
-    const finalUid = value || uid;
-
-    if (!finalUid.trim()) return;
-
+  const submitCheckIn = async (uid: string) => {
     try {
-      setLoading(true);
+        setLoading(true);
 
-      const response = await checkInByUid(finalUid.trim());
+        const response = await checkInByUid(uid);
 
-      setResult({
+        setResult({
         success: true,
-        message: response.message || "Check-in success",
+        message: response.message,
         member: response.member,
-      });
-
-      setUid("");
-      inputRef.current?.focus();
-    } catch (error: any) {
-      setResult({
+        });
+    } catch (err: any) {
+        setResult({
         success: false,
         message:
-          error?.response?.data?.message || "Check-in failed",
-      });
-
-      setUid("");
-      inputRef.current?.focus();
+            err.response?.data?.message ??
+            "Check-in failed",
+        });
     } finally {
-      setLoading(false);
+        setUid("");
+
+        if (inputRef.current) {
+        inputRef.current.value = "";
+        inputRef.current.focus();
+        }
+
+        setLoading(false);
+
+        setTimeout(() => {
+        setResult(null);
+
+        inputRef.current?.focus();
+        }, 3000);
     }
   };
 
   const handleKeyDown = async (
     e: React.KeyboardEvent<HTMLInputElement>
-  ) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      await submitCheckIn(e.currentTarget.value);
-    }
-  };
+    ) => {
+        if (e.key !== "Enter") return;
+
+        e.preventDefault();
+
+        const scannedUid = e.currentTarget.value.trim();
+
+        if (!scannedUid) return;
+
+        await submitCheckIn(scannedUid);
+    };
 
   return (
     <Layout title="Attendance Check-In">
@@ -82,20 +91,10 @@ export default function AttendancePage() {
 
           <input
             ref={inputRef}
-            value={uid}
-            onChange={(e) => setUid(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Waiting RFID UID..."
-            autoFocus
+            className="rfid-hidden-input"
           />
 
-          <button
-            type="button"
-            disabled={loading}
-            onClick={() => submitCheckIn()}
-          >
-            {loading ? "Checking..." : "Check In"}
-          </button>
         </div>
 
         <div className="panel attendance-result">

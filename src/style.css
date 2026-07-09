@@ -1035,3 +1035,27 @@ td {
 .calendar-day span {
   font-size: 15px;
 }
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.calendar-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.calendar-controls select,
+.calendar-controls input {
+  height: 42px;
+  margin: 0;
+}
+
+.rfid-hidden-input {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+}

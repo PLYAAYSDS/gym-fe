@@ -31,7 +31,14 @@ export const extendMembership = async (
   return response.data;
 };
 
-export const getMemberAttendanceHistory = async (userId: number) => {
-  const response = await api.get(`/attendance/user/${userId}`);
+export const getMemberAttendanceHistory = async (
+  userId: number,
+  month: number,
+  year: number,
+) => {
+  const response = await api.get(
+    `/attendance/user/${userId}?month=${month}&year=${year}`,
+  );
+
   return response.data;
 };
