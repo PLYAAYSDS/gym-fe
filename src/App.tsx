@@ -7,6 +7,7 @@ import CreateMemberPage from "./pages/CreateMemberPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import MemberDetailPage from "./pages/MemberDetailPage";
 import MobileNfcPage from "./components/CardScanner/MobileNfcPage";
+import AttendancePage from "./pages/AttendancePage";
 
 export default function App() {
   return (
@@ -54,7 +55,17 @@ export default function App() {
 
         <Route path="/mobile-nfc/:userId" element={<MobileNfcPage />} />
 
+        <Route
+          path="/attendance"
+          element={
+            <ProtectedRoute>
+              <AttendancePage />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        
       </Routes>
     </HashRouter>
   );

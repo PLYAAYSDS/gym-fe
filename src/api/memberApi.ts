@@ -18,3 +18,20 @@ export const assignRfid = async (userId: number, uid: string) => {
 
   return response.data;
 };
+
+export const extendMembership = async (
+  userId: number,
+  newExpiredDate: string,
+) => {
+  const response = await api.put("/users/extend-membership", {
+    userId,
+    newExpiredDate,
+  });
+
+  return response.data;
+};
+
+export const getMemberAttendanceHistory = async (userId: number) => {
+  const response = await api.get(`/attendance/user/${userId}`);
+  return response.data;
+};

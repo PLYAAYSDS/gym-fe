@@ -5,6 +5,7 @@ import {
   FaIdCard,
   FaUserPlus,
   FaUsers,
+  FaCalendarCheck,
 } from "react-icons/fa";
 
 export default function Sidebar() {
@@ -36,6 +37,11 @@ export default function Sidebar() {
         <NavLink to="/members/assign-rfid">
           <FaIdCard /> Assign RFID
         </NavLink>
+
+        <NavLink to="/attendance">
+            <FaCalendarCheck /> Attendance
+        </NavLink>
+
       </nav>
     </aside>
   );

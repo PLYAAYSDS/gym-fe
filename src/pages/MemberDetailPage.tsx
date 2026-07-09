@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 
 import Layout from "../components/Layout";
 import CardScannerModal from "../components/CardScanner/CardScannerModal";
-import { getMemberDetail } from "../api/memberApi";
+import { getMemberDetail, extendMembership, getMemberAttendanceHistory, } from "../api/memberApi";
+
 
 type MemberDetail = {
   userId: number;
@@ -25,7 +26,8 @@ type MemberDetail = {
 
 export default function MemberDetailPage() {
   const { userId } = useParams();
-
+  const [newExpiredDate, setNewExpiredDate] = useState("");
+  const [attendanceDates, setAttendanceDates] = useState<string[]>([]);
   const [member, setMember] = useState<MemberDetail | null>(null);
   const [scannerOpen, setScannerOpen] = useState(false);
 
@@ -36,8 +38,16 @@ export default function MemberDetailPage() {
     setMember(data);
   };
 
+  const loadAttendance = async () => {
+    if (!userId) return;
+
+    const data = await getMemberAttendanceHistory(Number(userId));
+    setAttendanceDates(data.map((item: any) => item.date));
+  };
+
   useEffect(() => {
     loadDetail();
+    loadAttendance();
   }, [userId]);
 
   if (!member) {
@@ -47,6 +57,20 @@ export default function MemberDetailPage() {
       </Layout>
     );
   }
+
+  const submitExtendMembership = async () => {
+    if (!newExpiredDate || !member) {
+      alert("Please select new expired date");
+      return;
+    }
+
+    await extendMembership(member.userId, newExpiredDate);
+
+    alert("Membership extended successfully");
+
+    setNewExpiredDate("");
+    await loadDetail();
+  };
 
   return (
     <Layout title="Member Detail">
@@ -110,6 +134,52 @@ export default function MemberDetailPage() {
           <button type="button" onClick={() => setScannerOpen(true)}>
             {member.uid ? "Replace Card" : "Sign Card"}
           </button>
+        </div>
+      </div>
+
+      <div className="panel">
+        <h2>Extend Membership</h2>
+
+        <p className="muted">
+          Current expired date:{" "}
+          <strong>{member.memberExpiredDate || "-"}</strong>
+        </p>
+
+        <input
+          type="date"
+          value={newExpiredDate}
+          onChange={(e) => setNewExpiredDate(e.target.value)}
+        />
+
+        <button type="button" onClick={submitExtendMembership}>
+          Extend Membership
+        </button>
+      </div>
+
+      <div className="panel attendance-calendar-panel">
+        <h2>Attendance Calendar</h2>
+
+        <div className="calendar-grid">
+          {Array.from({ length: 31 }).map((_, index) => {
+            const day = index + 1;
+
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, "0");
+            const date = String(day).padStart(2, "0");
+
+            const fullDate = `${year}-${month}-${date}`;
+            const checkedIn = attendanceDates.includes(fullDate);
+
+            return (
+              <div
+                key={fullDate}
+                className={checkedIn ? "calendar-day checked" : "calendar-day"}
+              >
+                <span>{day}</span>
+              </div>
+            );
+          })}
         </div>
       </div>
 
