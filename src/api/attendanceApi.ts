@@ -7,3 +7,11 @@ export const checkInByUid = async (uid: string) => {
 
   return response.data;
 };
+
+export const qrCheckIn = async (qrToken: string) => {
+  const response = await api.post("/attendance/qr-check-in", {
+    qrToken,
+  });
+
+  return response.data;
+};

@@ -1,5 +1,6 @@
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 
+import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import MemberListPage from "./pages/MemberListPage";
@@ -8,15 +9,18 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import MemberDetailPage from "./pages/MemberDetailPage";
 import MobileNfcPage from "./components/CardScanner/MobileNfcPage";
 import AttendancePage from "./pages/AttendancePage";
+import MemberLoginPage from "./pages/MemberLoginPage";
+import MemberHomePage from "./pages/MemberHomePage";
 
 export default function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
 
-        <Route path="/login" element={<LoginPage />} />
-
+        <Route path="/admin/login" element={<LoginPage />} />
+        <Route path="/login" element={<MemberLoginPage />} />
+        <Route path="/home" element={<LandingPage />} />
         <Route
           path="/dashboard"
           element={
@@ -64,7 +68,9 @@ export default function App() {
           }
         />
 
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/member/home" element={<MemberHomePage />} />
+
+        <Route path="*" element={<Navigate to="/" replace />} />
         
       </Routes>
     </HashRouter>
