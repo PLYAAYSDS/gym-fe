@@ -4,7 +4,6 @@ import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import MemberListPage from "./pages/MemberListPage";
 import CreateMemberPage from "./pages/CreateMemberPage";
-// import AssignRfidPage from "./pages/AssignRfidPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import MemberDetailPage from "./pages/MemberDetailPage";
 import MobileNfcPage from "./components/CardScanner/MobileNfcPage";
@@ -13,7 +12,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" />} />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
         <Route path="/login" element={<LoginPage />} />
 
@@ -44,15 +43,6 @@ export default function App() {
           }
         />
 
-        {/* <Route
-          path="/members/assign-rfid"
-          element={
-            <ProtectedRoute>
-              <AssignRfidPage />
-            </ProtectedRoute>
-          }
-        /> */}
-
         <Route
           path="/members/:userId"
           element={
@@ -64,16 +54,8 @@ export default function App() {
 
         <Route path="/mobile-nfc/:userId" element={<MobileNfcPage />} />
 
-        <Route
-          path="/members/:userId"
-          element={
-            <ProtectedRoute>
-              <MemberDetailPage />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
-
     </BrowserRouter>
   );
 }
