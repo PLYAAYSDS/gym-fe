@@ -16,7 +16,6 @@ type ScanResult = {
 
 export default function AttendancePage() {
   const inputRef = useRef<HTMLInputElement>(null);
-
   const [result, setResult] = useState<ScanResult | null>(null);
 
   useEffect(() => {
@@ -25,8 +24,7 @@ export default function AttendancePage() {
 
   const submitCheckIn = async (uid: string) => {
     try {
-        setLoading(true);
-
+        
         const response = await checkInByUid(uid);
 
         setResult({
@@ -42,14 +40,11 @@ export default function AttendancePage() {
             "Check-in failed",
         });
     } finally {
-        setUid("");
-
+        
         if (inputRef.current) {
         inputRef.current.value = "";
         inputRef.current.focus();
         }
-
-        setLoading(false);
 
         setTimeout(() => {
         setResult(null);
@@ -90,7 +85,7 @@ export default function AttendancePage() {
           <input
             ref={inputRef}
             onKeyDown={handleKeyDown}
-            className="rfid-hidden-input"
+              className="rfid-hidden-input"
           />
 
         </div>
