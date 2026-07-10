@@ -1,5 +1,7 @@
 import api from "./api";
 
+export type MembershipDurationType = "TRIAL" | "MONTH";
+
 export const getMembers = async () => {
   const response = await api.get("/users");
   return response.data;
@@ -21,11 +23,13 @@ export const assignRfid = async (userId: number, uid: string) => {
 
 export const extendMembership = async (
   userId: number,
-  newExpiredDate: string,
+  durationType: MembershipDurationType,
+  duration: number,
 ) => {
   const response = await api.put("/users/extend-membership", {
     userId,
-    newExpiredDate,
+    durationType,
+    duration,
   });
 
   return response.data;
