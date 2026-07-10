@@ -27,7 +27,9 @@ export default function MemberHomePage() {
         const data = await getMemberDashboard();
         setMember(data);
     } catch {
-        
+        localStorage.removeItem("memberToken");
+        localStorage.removeItem("memberData");
+        navigate("/member/login");
     }
   };
 

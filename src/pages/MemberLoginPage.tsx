@@ -12,32 +12,41 @@ export default function MemberLoginPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Clear stale member session when entering login page
-    navigate("/member/home");
-  }, []);
+    const memberToken = localStorage.getItem("memberToken");
+
+    if (memberToken) {
+      navigate("/member/home", { replace: true });
+    }
+  }, [navigate]);
 
   const login = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage("");
 
+    if (!identifier.trim() || !password.trim()) {
+      setErrorMessage("Username/email and password are required.");
+      return;
+    }
+
     try {
       setLoading(true);
 
       const response = await api.post("/auth/member-login", {
-        identifier,
+        identifier: identifier.trim(),
         password,
       });
 
       localStorage.setItem("memberToken", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-      console.log("Member login successful:", response.data);
-      console.log("Stored memberToken:", localStorage.getItem("memberToken"));
-      navigate("/member/home");
+      localStorage.setItem(
+        "memberData",
+        JSON.stringify(response.data.user),
+      );
+
+      navigate("/member/home", { replace: true });
     } catch (error: any) {
       setErrorMessage(
-        error?.response?.data?.message || "Member login failed"
+        error?.response?.data?.message || "Member login failed",
       );
-      
     } finally {
       setLoading(false);
     }
@@ -52,9 +61,10 @@ export default function MemberLoginPage() {
           </div>
 
           <h1>Onyx Fit</h1>
+
           <p>
-            Access your membership, QR check-in, and training attendance from
-            your personal member portal.
+            Access your membership, QR check-in, and training attendance
+            from your personal member portal.
           </p>
         </div>
 
@@ -70,19 +80,31 @@ export default function MemberLoginPage() {
             </div>
           )}
 
-          <label>Username / Email</label>
+          <label htmlFor="member-identifier">
+            Username / Email
+          </label>
+
           <input
+            id="member-identifier"
             value={identifier}
             onChange={(e) => setIdentifier(e.target.value)}
             placeholder="member@mail.com"
+            autoComplete="username"
+            disabled={loading}
           />
 
-          <label>Password</label>
+          <label htmlFor="member-password">
+            Password
+          </label>
+
           <input
+            id="member-password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Your password"
+            autoComplete="current-password"
+            disabled={loading}
           />
 
           <button type="submit" disabled={loading}>
@@ -93,6 +115,7 @@ export default function MemberLoginPage() {
             type="button"
             className="member-back-btn"
             onClick={() => navigate("/")}
+            disabled={loading}
           >
             Back to Landing Page
           </button>
